@@ -5,8 +5,11 @@ import { CommitsService } from './commits.service';
 export class CommitsController {
   constructor(private commitsService: CommitsService) {}
   @Get()
-  async getCommits(@Query('repository') repository: string) {
-    const response = await this.commitsService.getCommits(repository);
+  async getCommits(
+    @Query('repository') repository: string,
+    @Query('branch') branch: string,
+  ) {
+    const response = await this.commitsService.getCommits(repository, branch);
     const parsedDatad = this.commitsService.parseCommitData(response);
     return parsedDatad;
   }

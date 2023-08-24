@@ -26,10 +26,10 @@ export class CommitsService {
    * @throws {ConflictException} If no commits are found on a specified repository.
    * @throws {InternalServerErrorException} If an internal error occurs.
    */
-  async getCommits(repository: string): Promise<ICommit[]> {
+  async getCommits(repository: string, branch: string): Promise<ICommit[]> {
     const baseUrl = this.configService.get('github.baseUrl');
     const token = this.configService.get('github.token');
-    const finalUrl = repository + Urls.COMMITS;
+    const finalUrl = `${repository}${Urls.COMMITS}?sha=${branch}`;
     const response = await firstValueFrom(
       this.httpService.get(finalUrl, {
         baseURL: baseUrl,
@@ -55,11 +55,12 @@ export class CommitsService {
   parseCommitData(commitData: ICommit[]) {
     return commitData.map((data) => {
       return {
-        node_id: data.node_id,
+        nodeId: data.node_id,
         commit: {
           author: data.commit.author,
           commiter: data.commit.committer,
           message: data.commit.message,
+          url: data.html_url,
         },
       };
     });
