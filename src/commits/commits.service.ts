@@ -10,6 +10,9 @@ import { ConfigService } from '@nestjs/config';
 import { AxiosError } from 'axios';
 import { Urls } from 'src/config';
 import { Errors } from 'src/utils';
+import { QueryCommitDto } from './dto/commits.dto';
+import { plainToClass } from '@nestjs/class-transformer';
+import { CommitData } from 'src/transformers/commit.transformer';
 import { ICommit } from 'src/interfaces';
 
 @Injectable()
@@ -26,7 +29,10 @@ export class CommitsService {
    * @throws {ConflictException} If no commits are found on a specified repository.
    * @throws {InternalServerErrorException} If an internal error occurs.
    */
-  async getCommits(repository: string, branch: string): Promise<ICommit[]> {
+  async getCommits({
+    repository,
+    branch,
+  }: QueryCommitDto): Promise<CommitData[]> {
     const baseUrl = this.configService.get('github.baseUrl');
     const token = this.configService.get('github.token');
     const finalUrl = `${repository}${Urls.COMMITS}?sha=${branch}`;
@@ -50,19 +56,6 @@ export class CommitsService {
             throw new InternalServerErrorException(Errors.GENERAL_ERROR);
         }
       });
-    return response;
-  }
-  parseCommitData(commitData: ICommit[]) {
-    return commitData.map((data) => {
-      return {
-        nodeId: data.node_id,
-        commit: {
-          author: data.commit.author,
-          commiter: data.commit.committer,
-          message: data.commit.message,
-          url: data.html_url,
-        },
-      };
-    });
+    return response.map((e: ICommit) => plainToClass(CommitData, e));
   }
 }

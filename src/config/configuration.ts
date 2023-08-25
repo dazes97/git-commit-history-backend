@@ -3,11 +3,11 @@ const Configuration = () => ({
   github: {
     baseUrl: process.env.GITHUB_API_BASE_URL,
     token: process.env.GITHUB_API_TOKEN,
-    testToken: process.env.GITHUB_API_BASE_URL_TEST,
   },
   origin: {
     url: process.env.ORIGIN_URL,
     port: process.env.ORIGIN_PORT,
   },
+  enviroment: process.env.NODE_ENV,
 });
 export default Configuration;

@@ -1,73 +1,35 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Backend for Git Commit History
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The Git Commit History Backend is a server-side application that complements the Git Commit History project. It's responsible for fetching and serving commit data from selected repositories and branches.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project Overview
 
-## Description
+- **Technology Stack:** This backend is built using NestJS, a powerful Node.js framework. It leverages the Class Validator library for request validation, integrates Swagger for API documentation, and uses Axios and RxJS for efficient HTTP requests and asynchronous operations.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Fetching Commits:** The primary purpose of this backend is to provide a RESTful API that allows users to retrieve commit history from specific repositories and branches. Users can select a repository (either 'git-commit-history-frontend' or 'git-commit-history-backend') and a branch (either 'master' or 'develop') to retrieve relevant commit information.
 
-## Installation
+## How to Use
 
-```bash
-$ npm install
-```
+1. **Clone the Repository:** To set up the backend, clone this repository to your local development environment.
 
-## Running the app
+2. **Installation:** Follow the installation instructions to install dependencies and configure environment variables.
 
-```bash
-# development
-$ npm run start
+- create a .env file, copy the variables in .env.example 
+- set values:
+- SERVER_PORT=5000 (make sure is the same in the frontend repository)
+- GITHUB_API_BASE_URL=https://api.github.com/repos/dazes97/
+- GITHUB_API_TOKEN= (sent by email)
+- ORIGIN_URL=http://localhost (the frontend you chose)
+- ORIGIN_PORT=3000 (the frontend you chose)
+- NODE_ENV=development (enable swagger)
+- run "npm run start:dev"
+- enjoy!
 
-# watch mode
-$ npm run start:dev
+3. **API Documentation:** The backend includes Swagger documentation, which can be accessed by navigating to `http://localhost:5000/api` after starting the server. It provides detailed information about the available endpoints and how to use them.
 
-# production mode
-$ npm run start:prod
-```
+4. **Fetching Commits:** You can use the API endpoint `/commits` to fetch commits for a selected repository and branch.
 
-## Test
+Ensure that the repository name is one of the specified options ('git-commit-history-frontend' or 'git-commit-history-backend') and that the branch name is either 'master' or 'develop'.
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## Notes
+CORS are Enable, Private keys and env files are going to be sent by email. For Security purposes I can't commit private keys

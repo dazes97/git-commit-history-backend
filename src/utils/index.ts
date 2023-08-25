@@ -1,2 +1,3 @@
 import Errors from './errors.config';
-export { Errors };
+import { Branches, Repositories } from './utils.enum';
+export { Errors, Branches, Repositories };
