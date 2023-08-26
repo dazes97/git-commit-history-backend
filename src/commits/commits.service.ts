@@ -34,14 +34,12 @@ export class CommitsService {
     branch,
   }: QueryCommitDto): Promise<CommitData[]> {
     const baseUrl = this.configService.get('github.baseUrl');
-    const token = this.configService.get('github.token');
     const finalUrl = `${repository}${Urls.COMMITS}?sha=${branch}`;
     const response = await firstValueFrom(
       this.httpService.get(finalUrl, {
         baseURL: baseUrl,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
         },
       }),
     )
